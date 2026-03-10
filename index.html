@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Maplewood Commons HOA Portal</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy:      #0f1c2e;
+    --navy2:     #1a2d47;
+    --navy3:     #243452;
+    --gold:      #c9a84c;
+    --gold-lt:   #e8cc80;
+    --text:      #e8e8f0;
+    --muted:     #8a9ab8;
+    --card-bg:   rgba(255,255,255,0.05);
+    --card-bdr:  rgba(201,168,76,0.2);
+    --white:     #ffffff;
+  }
+
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: linear-gradient(135deg, #0f1c2e 0%, #1a2d47 50%, #101e38 100%);
+    min-height: 100vh;
+    color: var(--text);
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(90deg, #0a1520, #152038);
+    border-bottom: 2px solid var(--gold);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .logo-area { display: flex; align-items: center; gap: 14px; }
+
+  .logo-icon {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 4px 12px rgba(201,168,76,0.4);
+    flex-shrink: 0;
+  }
+
+  .logo-title { font-size: 22px; font-weight: bold; color: var(--gold); letter-spacing: 0.5px; }
+  .logo-sub   { font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+
+  .portal-badge {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex;
+    gap: 4px;
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.25);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  nav button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 13px;
+    font-family: Georgia, serif;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  nav button.active {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.15);
+    color: var(--gold);
+  }
+
+  nav button:hover:not(.active) { color: var(--text); }
+
+  /* ── MAIN ── */
+  .main { padding: 28px 20px; max-width: 1100px; margin: 0 auto; }
+
+  /* ── CARDS ── */
+  .card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px;
+    padding: clamp(14px,3vw,24px);
+    margin-bottom: 20px;
+    backdrop-filter: blur(4px);
+  }
+
+  .card-title {
+    color: var(--gold);
+    font-size: 18px;
+    margin-bottom: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    padding-bottom: 10px;
+  }
+
+  /* ── STAT CARDS ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .stat-card {
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-card.blue  { background: rgba(74,144,226,0.15); border: 1px solid rgba(74,144,226,0.3); }
+  .stat-card.gold  { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); }
+  .stat-card.green { background: rgba(76,175,135,0.15); border: 1px solid rgba(76,175,135,0.3); }
+  .stat-card.red   { background: rgba(224,92,92,0.15);  border: 1px solid rgba(224,92,92,0.3); }
+
+  .stat-num   { font-size: 36px; font-weight: bold; color: var(--text); line-height: 1; }
+  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+    color: var(--navy);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 8px;
+    margin-bottom: 6px;
+    transition: opacity 0.2s;
+  }
+  .btn:hover { opacity: 0.9; }
+
+  .btn-sm {
+    background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+    color: var(--navy);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    font-size: 12px;
+    margin-right: 6px;
+  }
+
+  .btn-out {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    margin-right: 8px;
+  }
+
+  /* ── TABLE ── */
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    text-align: left;
+    padding: 10px 14px;
+    background: rgba(201,168,76,0.1);
+    color: var(--gold);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 14px;
+    vertical-align: middle;
+  }
+  tr:hover td { background: rgba(255,255,255,0.03); }
+
+  /* ── PILL TAGS ── */
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+  }
+  .pill-gold  { background: rgba(201,168,76,0.2); color: var(--gold); border: 1px solid rgba(201,168,76,0.4); }
+  .pill-blue  { background: rgba(74,144,226,0.2); color: #7ab0f0; border: 1px solid rgba(74,144,226,0.4); }
+  .pill-green { background: rgba(76,175,135,0.2); color: #5ecba0; border: 1px solid rgba(76,175,135,0.4); }
+  .pill-red   { background: rgba(224,92,92,0.2);  color: #e07878; border: 1px solid rgba(224,92,92,0.4); }
+
+  /* ── SECTION HEADERS ── */
+  .sec-head { font-size: clamp(18px,4vw,24px); color: var(--gold); margin-bottom: 8px; font-weight: bold; }
+  .sec-sub  { color: var(--muted); margin-bottom: 24px; font-size: 14px; }
+
+  /* ── INPUT ── */
+  input, select, textarea {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--text);
+    font-family: Georgia, serif;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    outline: none;
+  }
+  input:focus, textarea:focus { border-color: var(--gold); }
+  textarea { min-height: 100px; resize: vertical; }
+
+  /* ── ANNOUNCEMENT CARDS ── */
+  .ann-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    transition: background 0.2s;
+  }
+  .ann-card:hover { background: rgba(255,255,255,0.07); }
+  .ann-card.alert { border-left-color: #e05c5c; }
+  .ann-card.info  { border-left-color: #4a90e2; }
+
+  .ann-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .ann-title { font-size: 15px; font-weight: bold; color: var(--text); margin-bottom: 4px; }
+  .ann-body  { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+  /* ── EVENTS ── */
+  .event-row {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .event-row:last-child { border-bottom: none; }
+
+  .event-date {
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 8px;
+    padding: 6px 10px;
+    text-align: center;
+    min-width: 48px;
+    flex-shrink: 0;
+  }
+  .event-mo  { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); font-weight: bold; }
+  .event-day { font-size: 22px; font-weight: bold; color: var(--text); line-height: 1; }
+
+  .event-info strong { font-size: 14px; color: var(--text); display: block; margin-bottom: 3px; }
+  .event-info span   { font-size: 12px; color: var(--muted); }
+
+  /* ── QUICK LINKS ── */
+  .quick-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+  }
+
+  .quick-link {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 10px;
+    padding: 14px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .quick-link:hover { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.35); }
+  .ql-icon  { font-size: 1.4rem; display: block; margin-bottom: 6px; }
+  .ql-label { font-size: 11px; font-weight: bold; color: var(--gold); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* ── BOARD AVATARS ── */
+  .board-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+  .board-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 10px;
+    padding: 14px 10px;
+    text-align: center;
+  }
+  .avatar {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    margin: 0 auto 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; font-weight: bold; color: white;
+  }
+  .av1 { background: linear-gradient(135deg,#2d5a3d,#4caf87); }
+  .av2 { background: linear-gradient(135deg,#3a2d5a,#7c5be0); }
+  .av3 { background: linear-gradient(135deg,#2d3a5a,#5b8dee); }
+  .av4 { background: linear-gradient(135deg,#5a3a2d,#e09a3a); }
+  .av5 { background: linear-gradient(135deg,#2d4a5a,#3ab8c9); }
+
+  .board-card strong { display: block; font-size: 12px; font-weight: bold; color: var(--text); }
+  .board-card span   { font-size: 11px; color: var(--muted); }
+
+  /* ── TASKS ── */
+  .task-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 14px;
+  }
+  .task-row:last-child { border-bottom: none; }
+
+  .task-check {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(201,168,76,0.3);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  .task-check.done { background: #4caf87; border-color: #4caf87; color: white; }
+
+  .task-text        { flex: 1; color: var(--text); }
+  .task-text.done   { text-decoration: line-through; color: var(--muted); }
+
+  /* ── PROGRESS ── */
+  .progress-wrap  { margin-bottom: 18px; }
+  .progress-label { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 13px; }
+  .progress-bar   { background: rgba(255,255,255,0.08); border-radius: 10px; height: 6px; overflow: hidden; }
+  .progress-fill  { height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--gold), var(--gold-lt)); }
+
+  /* ── MINUTES ── */
+  .minutes-card { border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+  .minutes-hdr  { background: rgba(201,168,76,0.08); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(201,168,76,0.15); }
+  .minutes-hdr strong { color: var(--gold); font-size: 14px; }
+  .minutes-hdr span   { color: var(--muted); font-size: 12px; }
+  .minutes-body { padding: 18px 20px; }
+  .mi-item      { display: flex; gap: 12px; margin-bottom: 14px; font-size: 13px; }
+  .mi-dot       { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 6px; }
+  .mi-text strong { color: var(--text); font-weight: bold; display: block; margin-bottom: 3px; }
+  .mi-text p      { color: var(--muted); line-height: 1.6; }
+
+  /* ── NEWSLETTER ── */
+  .nl-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 8px;
+    padding: 12px 14px;
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .nl-item:hover { background: rgba(201,168,76,0.08); }
+  .nl-item strong { font-size: 13px; color: var(--text); display: block; }
+  .nl-item span   { font-size: 12px; color: var(--muted); }
+
+  /* ── TABS ── */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ── 2-COL LAYOUT ── */
+  .two-col { display: grid; grid-template-columns: 1fr 320px; gap: 24px; }
+  @media(max-width:760px) { .two-col { grid-template-columns: 1fr; } .board-grid { grid-template-columns: repeat(3,1fr); } }
+
+  /* ── TAG ── */
+  .tag {
+    display: inline-block;
+    background: rgba(201,168,76,0.12);
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    margin-right: 4px;
+  }
+
+  /* ── LOCK SCREEN ── */
+  .lock-screen {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f1c2e 0%, #1a2d47 50%, #101e38 100%);
+  }
+
+  /* ── DOC ROW ── */
+  .doc-row {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .doc-row:hover { background: rgba(201,168,76,0.07); }
+  .doc-row strong { font-size: 14px; color: var(--text); display: block; }
+  .doc-row span   { font-size: 12px; color: var(--muted); }
+  .doc-arrow      { font-size: 12px; color: var(--gold); font-weight: bold; margin-left: auto; flex-shrink: 0; }
+
+  /* ── VENDOR GRID ── */
+  .vendor-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 12px; }
+  .vendor-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .vendor-card strong { font-size: 14px; color: var(--text); display: block; margin-bottom: 3px; }
+  .vendor-card .v-cat { font-size: 12px; color: var(--muted); display: block; margin-bottom: 8px; }
+  .vendor-card .v-ph  { font-size: 12px; color: var(--gold); font-weight: bold; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: rgba(0,0,0,0.35);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 24px 20px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 20px;
+  }
+  footer strong { color: var(--gold); }
+  .footer-links { display: flex; justify-content: center; gap: 20px; margin-top: 10px; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 12px; }
+  .footer-links a:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="logo-area">
+    <div class="logo-icon">🏘️</div>
+    <div>
+      <div class="logo-title">Maplewood Commons</div>
+      <div class="logo-sub">Homeowners Association</div>
+    </div>
+  </div>
+  <div class="portal-badge">COMMUNITY PORTAL</div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <button class="active" onclick="switchTab('dashboard',this)">Dashboard</button>
+  <button onclick="switchTab('announcements',this)">Announcements</button>
+  <button onclick="switchTab('newsletter',this)">Newsletter</button>
+  <button onclick="switchTab('minutes',this)">Minutes</button>
+  <button onclick="switchTab('tasks',this)">Tasks</button>
+  <button onclick="switchTab('directory',this)">Directory</button>
+  <button onclick="switchTab('resources',this)">Resources</button>
+</nav>
+
+<!-- ════════════════════════════════════════════
+     DASHBOARD
+════════════════════════════════════════════ -->
+<div id="tab-dashboard" class="tab-content active">
+<div class="main">
+
+  <div class="sec-head">Welcome, Maplewood Neighbors! 👋</div>
+  <div class="sec-sub">Your community hub — stay informed, connected, and engaged.</div>
+
+  <div class="two-col">
+    <div>
+      <!-- ANNOUNCEMENTS -->
+      <div class="card">
+        <div class="card-title">📢 Latest Announcements</div>
+
+        <div class="ann-card">
+          <div class="ann-meta">
+            <span class="pill pill-gold">🌳 Community Event</span>
+            <span style="font-size:12px;color:var(--muted)">Mar 8, 2026</span>
+          </div>
+          <div class="ann-title">Spring Community Cleanup — March 22nd</div>
+          <div class="ann-body">Join your neighbors for our annual spring beautification day! Refreshing the entrance landscaping, cleaning the walking trail, and sprucing up common areas. Gloves and tools provided — pizza lunch included!</div>
+        </div>
+
+        <div class="ann-card alert">
+          <div class="ann-meta">
+            <span class="pill pill-red">⚠️ Important</span>
+            <span style="font-size:12px;color:var(--muted)">Mar 5, 2026</span>
+          </div>
+          <div class="ann-title">Pool Opening Delayed — New Date May 15</div>
+          <div class="ann-body">Due to necessary repairs to the filtration system, the community pool will open May 15th instead of May 1st. Work begins next week. We appreciate your patience!</div>
+        </div>
+
+        <div class="ann-card info">
+          <div class="ann-meta">
+            <span class="pill pill-blue">📋 HOA Update</span>
+            <span style="font-size:12px;color:var(--muted)">Feb 28, 2026</span>
+          </div>
+          <div class="ann-title">2026 Budget Approved — Dues Unchanged</div>
+          <div class="ann-body">The 2026 annual budget was approved with no change to quarterly dues. Reserve fund is at 94% funded — well above recommended threshold. Full budget summary available in Resources.</div>
+        </div>
+
+        <button class="btn-out" onclick="switchTabByName('announcements')">View All Announcements →</button>
+      </div>
+
+      <!-- NEWSLETTER PREVIEW -->
+      <div class="card">
+        <div class="card-title">📰 Spring 2026 Newsletter — The Maplewood Maple</div>
+
+        <div class="nl-item">
+          <span style="font-size:1.4rem">🏡</span>
+          <div>
+            <strong>Neighbor Spotlight: The Martinson Family</strong>
+            <span>How they transformed their front yard into a pollinator garden</span>
+          </div>
+        </div>
+        <div class="nl-item">
+          <span style="font-size:1.4rem">🌿</span>
+          <div>
+            <strong>Spring Landscaping Tips from GreenScape Atlanta</strong>
+            <span>HOA-approved vendor shares seasonal care guide</span>
+          </div>
+        </div>
+        <div class="nl-item">
+          <span style="font-size:1.4rem">🎉</span>
+          <div>
+            <strong>July 4th Block Party Planning Begins!</strong>
+            <span>Annual celebration — volunteers needed now</span>
+          </div>
+        </div>
+
+        <button class="btn" onclick="switchTabByName('newsletter')" style="margin-top:6px">Read Full Newsletter</button>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div>
+      <!-- EVENTS -->
+      <div class="card">
+        <div class="card-title">📅 Upcoming Events</div>
+        <div class="event-row">
+          <div class="event-date"><div class="event-mo">Mar</div><div class="event-day">18</div></div>
+          <div class="event-info"><strong>Board Meeting</strong><span>7:00 PM · Community Clubhouse</span></div>
+        </div>
+        <div class="event-row">
+          <div class="event-date"><div class="event-mo">Mar</div><div class="event-day">22</div></div>
+          <div class="event-info"><strong>Spring Cleanup Day</strong><span>9:00 AM · Neighborhood Entrance</span></div>
+        </div>
+        <div class="event-row">
+          <div class="event-date"><div class="event-mo">Apr</div><div class="event-day">5</div></div>
+          <div class="event-info"><strong>Easter Egg Hunt</strong><span>10:00 AM · Common Area Park</span></div>
+        </div>
+        <div class="event-row">
+          <div class="event-date"><div class="event-mo">Apr</div><div class="event-day">15</div></div>
+          <div class="event-info"><strong>Q2 Dues Deadline</strong><span>$385.00 due by this date</span></div>
+        </div>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div class="card">
+        <div class="card-title">⚡ Quick Links</div>
+        <div class="quick-grid">
+          <a class="quick-link"><span class="ql-icon">🏗️</span><span class="ql-label">ACC Request</span></a>
+          <a class="quick-link"><span class="ql-icon">📚</span><span class="ql-label">Bylaws</span></a>
+          <a class="quick-link"><span class="ql-icon">🔧</span><span class="ql-label">Report Issue</span></a>
+          <a class="quick-link"><span class="ql-icon">👥</span><span class="ql-label">Directory</span></a>
+        </div>
+      </div>
+
+      <!-- BOARD -->
+      <div class="card">
+        <div class="card-title">🏛️ Your Board</div>
+        <div class="board-grid">
+          <div class="board-card"><div class="avatar av1">RH</div><strong>Robert Hayes</strong><span>President</span></div>
+          <div class="board-card"><div class="avatar av2">SM</div><strong>Sandra Mills</strong><span>Secretary</span></div>
+          <div class="board-card"><div class="avatar av3">TK</div><strong>Tom Kwon</strong><span>Treasurer</span></div>
+          <div class="board-card"><div class="avatar av4">LR</div><strong>Linda Ross</strong><span>At-Large</span></div>
+          <div class="board-card"><div class="avatar av5">DJ</div><strong>David James</strong><span>At-Large</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     ANNOUNCEMENTS
+════════════════════════════════════════════ -->
+<div id="tab-announcements" class="tab-content">
+<div class="main">
+  <div class="sec-head">📢 Announcements</div>
+  <div class="sec-sub">Stay informed with the latest news, alerts, and updates from your HOA board.</div>
+
+  <div class="card">
+    <div class="ann-card">
+      <div class="ann-meta"><span class="pill pill-gold">🌳 Community Event</span><span style="font-size:12px;color:var(--muted)">Mar 8, 2026</span></div>
+      <div class="ann-title">Spring Community Cleanup — March 22nd</div>
+      <div class="ann-body">Join your neighbors for our annual spring beautification day! We'll be refreshing the entrance landscaping, cleaning up the walking trail, and sprucing up the common areas together. Gloves and tools provided. Pizza lunch included for all volunteers! Meet at the neighborhood entrance at 9 AM sharp.</div>
+    </div>
+    <div class="ann-card alert">
+      <div class="ann-meta"><span class="pill pill-red">⚠️ Important</span><span style="font-size:12px;color:var(--muted)">Mar 5, 2026</span></div>
+      <div class="ann-title">Pool Opening Delayed — New Date May 15</div>
+      <div class="ann-body">Due to necessary repairs to the filtration system discovered during our annual inspection, the community pool will open May 15th rather than May 1st. The board approved a repair contract with AquaClear Services and work begins March 17th. Questions? Contact board@maplewoodcommons.com</div>
+    </div>
+    <div class="ann-card info">
+      <div class="ann-meta"><span class="pill pill-blue">📋 HOA Update</span><span style="font-size:12px;color:var(--muted)">Feb 28, 2026</span></div>
+      <div class="ann-title">2026 Annual Budget Approved — Dues Remain Unchanged</div>
+      <div class="ann-body">The board is pleased to announce the 2026 annual budget was unanimously approved at our February 25th meeting with no increase to quarterly dues ($385/quarter). The reserve fund is currently at 94% funded — well above the recommended threshold. A full budget summary is available in Resources.</div>
+    </div>
+    <div class="ann-card">
+      <div class="ann-meta"><span class="pill pill-green">🔨 Maintenance</span><span style="font-size:12px;color:var(--muted)">Feb 20, 2026</span></div>
+      <div class="ann-title">Entrance Monument Signs — Renovation Complete!</div>
+      <div class="ann-body">The restoration of our neighborhood entrance monuments is complete. The stone was cleaned, re-mortared, and fitted with energy-efficient LED landscape lighting. The project came in $400 under budget. Thank you to the Beautification Committee and the neighbors who donated plants from their gardens!</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     NEWSLETTER
+════════════════════════════════════════════ -->
+<div id="tab-newsletter" class="tab-content">
+<div class="main">
+  <div class="sec-head">📰 The Maplewood Maple</div>
+  <div class="sec-sub">Your quarterly neighborhood newsletter — keeping our community connected, informed, and inspired.</div>
+
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <div class="card-title">🌸 Spring 2026 — From the President's Desk</div>
+        <p style="font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:14px">Dear Maplewood Neighbors,</p>
+        <p style="font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:14px">Spring has arrived in Maplewood Commons, and with it comes the renewed energy and sense of community that makes living here so special. As I look around our neighborhood, I'm genuinely inspired by the pride you all take in your homes and in our shared spaces.</p>
+        <p style="font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:14px">This quarter brought some exciting accomplishments: our entrance monument renovation is complete and looks stunning, our reserve fund remains robust, and we've launched this new community portal to make it even easier to stay connected.</p>
+        <p style="font-size:14px;color:var(--muted);line-height:1.85">Warmly,<br><strong style="color:var(--text)">Robert Hayes, HOA President</strong></p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🌻 Neighbor Spotlight: The Martinson Family</div>
+        <p style="font-size:14px;color:var(--muted);line-height:1.85">When Kevin and Amy Martinson moved to Maplewood Commons three years ago, their front yard was standard fescue. Today it's a thriving, ACC-approved pollinator paradise featuring native Georgia wildflowers, milkweed for monarchs, and a small water feature that's become a neighborhood landmark. "We just wanted to do something good for the bees," Amy shared. Three other households have since submitted ACC requests for similar gardens. The board fully encourages these beautiful, sustainable upgrades!</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🏡 Spring Lawn & Home Care Checklist</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:8px;padding:12px;font-size:13px;color:var(--muted)">✅ <strong style="color:var(--text)">Aerate & overseed</strong> fescue lawn in early spring</div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:8px;padding:12px;font-size:13px;color:var(--muted)">✅ <strong style="color:var(--text)">Clean gutters</strong> of winter debris before rain season</div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:8px;padding:12px;font-size:13px;color:var(--muted)">✅ <strong style="color:var(--text)">Inspect irrigation</strong> heads before activating systems</div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:8px;padding:12px;font-size:13px;color:var(--muted)">✅ <strong style="color:var(--text)">Pressure wash</strong> driveways and sidewalks</div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:8px;padding:12px;font-size:13px;color:var(--muted)">✅ <strong style="color:var(--text)">Mulch beds</strong> with 3" of pine straw or hardwood</div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:8px;padding:12px;font-size:13px;color:var(--muted)">✅ <strong style="color:var(--text)">Check HVAC</strong> filters before cooling season begins</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-title">📁 Past Issues</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);border-radius:8px;padding:12px;cursor:pointer"><strong style="font-size:13px;color:var(--gold);display:block">🌸 Spring 2026</strong><span style="font-size:11px;color:var(--muted)">Current Issue</span></div>
+          <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:12px;cursor:pointer"><strong style="font-size:13px;color:var(--text);display:block">❄️ Winter 2025</strong><span style="font-size:11px;color:var(--muted)">December 2025</span></div>
+          <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:12px;cursor:pointer"><strong style="font-size:13px;color:var(--text);display:block">🍂 Fall 2025</strong><span style="font-size:11px;color:var(--muted)">September 2025</span></div>
+          <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:12px;cursor:pointer"><strong style="font-size:13px;color:var(--text);display:block">☀️ Summer 2025</strong><span style="font-size:11px;color:var(--muted)">June 2025</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">✉️ Nominate a Neighbor</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.65">Know a neighbor doing something wonderful? We'd love to feature them in our next newsletter!</p>
+        <button class="btn" style="width:100%">Submit a Nomination</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     MINUTES
+════════════════════════════════════════════ -->
+<div id="tab-minutes" class="tab-content">
+<div class="main">
+  <div class="sec-head">📋 Meeting Minutes</div>
+  <div class="sec-sub">Official records of all HOA board meetings — transparent governance for our community.</div>
+
+  <div class="two-col">
+    <div>
+      <div class="minutes-card">
+        <div class="minutes-hdr">
+          <strong>February 25, 2026 — Regular Board Meeting</strong>
+          <span>✅ Approved · 5 of 5 Present</span>
+        </div>
+        <div class="minutes-body">
+          <div class="mi-item"><div class="mi-dot"></div><div class="mi-text"><strong>Call to Order</strong><p>President Robert Hayes called the meeting to order at 7:04 PM. A quorum was confirmed with all five board members present. Sandra Mills serving as Secretary.</p></div></div>
+          <div class="mi-item"><div class="mi-dot"></div><div class="mi-text"><strong>2026 Budget Approval</strong><p>Treasurer Tom Kwon presented the proposed 2026 operating budget of $142,800. Reserve fund contributions remain at $28,500/year. Motion to approve: Hayes. Second: Ross. Approved 5-0. Quarterly dues unchanged at $385.</p></div></div>
+          <div class="mi-item"><div class="mi-dot"></div><div class="mi-text"><strong>Pool Inspection Report</strong><p>David James reported results of annual pool inspection. Filtration system requires replacement. Three bids reviewed: AquaClear ($4,200), PoolPro ($5,100), Blue Wave ($4,850). Motion to accept AquaClear bid: James. Second: Mills. Approved 4-1.</p></div></div>
+          <div class="mi-item"><div class="mi-dot"></div><div class="mi-text"><strong>ACC Application — 14 Birchwood Ct</strong><p>Application for 6' cedar privacy fence replacement reviewed. Meets community standards. Motion to approve: Mills. Second: Kwon. Approved 5-0.</p></div></div>
+          <div class="mi-item"><div class="mi-dot"></div><div class="mi-text"><strong>Adjournment</strong><p>Meeting adjourned at 8:32 PM. Next meeting: March 18, 2026 at 7:00 PM, Community Clubhouse.</p></div></div>
+        </div>
+      </div>
+
+      <div class="minutes-card">
+        <div class="minutes-hdr">
+          <strong>January 21, 2026 — Regular Board Meeting</strong>
+          <span>✅ Approved · 4 of 5 Present</span>
+        </div>
+        <div class="minutes-body">
+          <div class="mi-item"><div class="mi-dot"></div><div class="mi-text"><strong>2026 New Year Priorities</strong><p>Board discussed priority projects: community portal launch, entrance monument restoration, and pool area improvements. Three committees formed with volunteer leads.</p></div></div>
+          <div class="mi-item"><div class="mi-dot"></div><div class="mi-text"><strong>Community Portal Launch</strong><p>Portal presented to board. Unanimously praised for design and functionality. Board approved soft launch to residents by February 1st.</p></div></div>
+          <div class="mi-item"><div class="mi-dot"></div><div class="mi-text"><strong>Entrance Monument Project</strong><p>GreenScape Atlanta selected at $3,600 — $400 under approved budget. Work begins January 27th.</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-title">📁 Minutes Archive</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);border-radius:8px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer"><span style="font-size:13px;color:var(--text)">Feb 25, 2026</span><span style="font-size:11px;color:#5ecba0;font-weight:bold">APPROVED</span></div>
+          <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer"><span style="font-size:13px;color:var(--text)">Jan 21, 2026</span><span style="font-size:11px;color:#5ecba0;font-weight:bold">APPROVED</span></div>
+          <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer"><span style="font-size:13px;color:var(--text)">Nov 19, 2025</span><span style="font-size:11px;color:#5ecba0;font-weight:bold">APPROVED</span></div>
+          <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer"><span style="font-size:13px;color:var(--text)">Oct 15, 2025</span><span style="font-size:11px;color:#5ecba0;font-weight:bold">APPROVED</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📅 Next Meeting</div>
+        <div style="text-align:center;padding:10px 0">
+          <div style="font-size:52px;font-weight:bold;color:var(--gold);line-height:1">18</div>
+          <div style="font-size:13px;color:var(--muted);margin-bottom:12px">March 2026 · 7:00 PM</div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:8px;padding:12px;font-size:13px;color:var(--muted)">📍 Maplewood Commons Clubhouse<br>42 Commons Drive, Roswell GA</div>
+          <button class="btn" style="margin-top:14px;width:100%">📅 Add to Calendar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     TASKS
+════════════════════════════════════════════ -->
+<div id="tab-tasks" class="tab-content">
+<div class="main">
+  <div class="sec-head">✅ Board Task Tracker</div>
+  <div class="sec-sub">Active action items and project status for the Maplewood Commons HOA board — Q1 2026.</div>
+
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <div class="card-title">📌 Q1 2026 Action Items</div>
+
+        <div class="task-row"><div class="task-check done">✓</div><div class="task-text done">Approve 2026 annual operating budget</div><span class="pill pill-green">Done</span></div>
+        <div class="task-row"><div class="task-check done">✓</div><div class="task-text done">Complete entrance monument restoration project</div><span class="pill pill-green">Done</span></div>
+        <div class="task-row"><div class="task-check done">✓</div><div class="task-text done">Launch community portal to residents</div><span class="pill pill-green">Done</span></div>
+        <div class="task-row"><div class="task-check"></div><div class="task-text">Award pool filtration repair contract to AquaClear</div><span class="pill pill-red">High</span></div>
+        <div class="task-row"><div class="task-check"></div><div class="task-text">Organize and promote Spring Community Cleanup Day (Mar 22)</div><span class="pill pill-gold">Med</span></div>
+        <div class="task-row"><div class="task-check"></div><div class="task-text">Send Q2 dues invoices to all 87 homeowners</div><span class="pill pill-red">High</span></div>
+        <div class="task-row"><div class="task-check"></div><div class="task-text">Recruit July 4th Block Party volunteer committee</div><span class="pill pill-blue">Low</span></div>
+        <div class="task-row"><div class="task-check"></div><div class="task-text">Publish Spring 2026 newsletter to community portal</div><span class="pill pill-gold">Med</span></div>
+        <div class="task-row"><div class="task-check"></div><div class="task-text">Update vendor list on Google Site with new approved contractors</div><span class="pill pill-blue">Low</span></div>
+        <div class="task-row"><div class="task-check"></div><div class="task-text">Follow up on covenant violation — 7 Elm Trace (landscape)</div><span class="pill pill-red">High</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📊 Project Progress</div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Pool Repair Project</span><span style="color:var(--muted)">25%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Q2 Dues Collection</span><span style="color:var(--muted)">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Spring Cleanup Event Planning</span><span style="color:var(--muted)">70%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:70%"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Google Site Update</span><span style="color:var(--muted)">45%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-title">📈 Summary</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="background:rgba(76,175,135,0.12);border:1px solid rgba(76,175,135,0.25);border-radius:8px;padding:12px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;color:#5ecba0;font-weight:bold">✓ Completed</span><span style="font-size:22px;font-weight:bold;color:#5ecba0">3</span></div>
+          <div style="background:rgba(224,92,92,0.12);border:1px solid rgba(224,92,92,0.25);border-radius:8px;padding:12px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;color:#e07878;font-weight:bold">🔴 High Priority</span><span style="font-size:22px;font-weight:bold;color:#e07878">4</span></div>
+          <div style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);border-radius:8px;padding:12px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;color:var(--gold);font-weight:bold">🟡 Medium</span><span style="font-size:22px;font-weight:bold;color:var(--gold)">2</span></div>
+          <div style="background:rgba(74,144,226,0.12);border:1px solid rgba(74,144,226,0.25);border-radius:8px;padding:12px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;color:#7ab0f0;font-weight:bold">🔵 Low Priority</span><span style="font-size:22px;font-weight:bold;color:#7ab0f0">2</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">👤 Assigned To</div>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div style="display:flex;justify-content:space-between;font-size:13px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><span>Robert Hayes</span><span style="color:var(--muted)">3 tasks</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><span>Sandra Mills</span><span style="color:var(--muted)">3 tasks</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><span>Tom Kwon</span><span style="color:var(--muted)">2 tasks</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;padding:10px 0"><span>Linda Ross / David James</span><span style="color:var(--muted)">1 each</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     DIRECTORY
+════════════════════════════════════════════ -->
+<div id="tab-directory" class="tab-content">
+<div class="main">
+  <div class="sec-head">👥 Neighbor Directory</div>
+  <div class="sec-sub">Connect with your Maplewood Commons neighbors — kept strictly confidential for community use only.</div>
+
+  <div class="card" style="text-align:center;padding:48px 24px">
+    <div style="font-size:56px;margin-bottom:16px">🔐</div>
+    <div style="color:var(--gold);font-size:18px;font-weight:bold;margin-bottom:10px">Directory Access Requires Login</div>
+    <div style="color:var(--muted);font-size:14px;max-width:380px;margin:0 auto 24px;line-height:1.7">To protect our neighbors' privacy, the community directory is password protected. Use the community password shared in your welcome packet.</div>
+    <button class="btn">🔑 Enter Community Password</button>
+    <button class="btn-out">Contact the Board</button>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     RESOURCES
+════════════════════════════════════════════ -->
+<div id="tab-resources" class="tab-content">
+<div class="main">
+  <div class="sec-head">📚 Community Resources</div>
+  <div class="sec-sub">HOA documents, approved vendors, and helpful guides for Maplewood Commons residents.</div>
+
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <div class="card-title">📄 Governing Documents</div>
+        <div class="doc-row"><span style="font-size:1.4rem">📄</span><div><strong>Community Bylaws</strong><span>Last updated: January 2024 · PDF</span></div><span class="doc-arrow">Download →</span></div>
+        <div class="doc-row"><span style="font-size:1.4rem">📋</span><div><strong>Declaration of Covenants (CCRs)</strong><span>Recorded: March 1994 · PDF</span></div><span class="doc-arrow">Download →</span></div>
+        <div class="doc-row"><span style="font-size:1.4rem">🏗️</span><div><strong>Architectural Review Guidelines & ACC Form</strong><span>Updated: August 2025 · PDF + Form</span></div><span class="doc-arrow">Download →</span></div>
+        <div class="doc-row"><span style="font-size:1.4rem">💰</span><div><strong>2026 Approved Budget Summary</strong><span>Approved: Feb 25, 2026 · PDF</span></div><span class="doc-arrow">Download →</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🔧 HOA-Approved Vendors</div>
+        <div class="vendor-grid">
+          <div class="vendor-card"><div style="font-size:1.2rem;margin-bottom:6px">🌿</div><strong>GreenScape Atlanta</strong><span class="v-cat">Landscaping & Lawn Care</span><span class="v-ph">(770) 555-0142</span></div>
+          <div class="vendor-card"><div style="font-size:1.2rem;margin-bottom:6px">🏊</div><strong>AquaClear Services</strong><span class="v-cat">Pool Maintenance & Repair</span><span class="v-ph">(770) 555-0198</span></div>
+          <div class="vendor-card"><div style="font-size:1.2rem;margin-bottom:6px">⚡</div><strong>Peachtree Electric</strong><span class="v-cat">Electrical Services</span><span class="v-ph">(770) 555-0217</span></div>
+          <div class="vendor-card"><div style="font-size:1.2rem;margin-bottom:6px">🔨</div><strong>Roswell Renovations</strong><span class="v-cat">General Contracting</span><span class="v-ph">(770) 555-0304</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-title">💳 Pay Dues Online</div>
+        <div style="text-align:center;padding:8px 0">
+          <div style="font-size:2rem;margin-bottom:8px">💳</div>
+          <strong style="display:block;font-size:14px;margin-bottom:4px">Q2 2026 Dues</strong>
+          <div style="font-size:36px;font-weight:bold;color:var(--gold);margin-bottom:4px">$385.00</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:16px">Due April 15, 2026</div>
+          <button class="btn" style="width:100%">Pay Securely Online</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">✉️ Contact the Board</div>
+        <div style="font-size:13px;color:var(--muted);line-height:2">
+          <div>📧 board@maplewoodcommons.com</div>
+          <div>📮 P.O. Box 1184, Roswell GA 30076</div>
+          <div>⏱️ Response within 3–5 business days</div>
+        </div>
+        <button class="btn" style="margin-top:14px;width:100%">Send a Message</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Maplewood Commons HOA</strong> · Roswell, Georgia · Est. 1994<br>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Contact Board</a>
+    <a href="#">Report an Issue</a>
+  </div>
+  <div style="margin-top:10px;font-size:11px;opacity:0.4">Demonstration portal — all information is fictional and created for portfolio purposes.</div>
+</footer>
+
+<script>
+  function switchTab(name, el) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    if (el) el.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function switchTabByName(name) {
+    const map = { dashboard: 0, announcements: 1, newsletter: 2, minutes: 3, tasks: 4, directory: 5, resources: 6 };
+    const btns = document.querySelectorAll('nav button');
+    switchTab(name, btns[map[name]]);
+  }
+</script>
+
+</body>
+</html>
