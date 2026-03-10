@@ -483,14 +483,14 @@
 <div id="tab-dashboard" class="tab-content active">
 <div class="main">
 
-  <div class="sec-head">Welcome, Maplewood Neighbors! 👋</div>
+  <div class="sec-head">Welcome, Maplewood Neighbors!</div>
   <div class="sec-sub">Your community hub — stay informed, connected, and engaged.</div>
 
   <div class="two-col">
     <div>
       <!-- ANNOUNCEMENTS -->
       <div class="card">
-        <div class="card-title">📢 Latest Announcements</div>
+        <div class="card-title">Latest Announcements</div>
 
         <div class="ann-card">
           <div class="ann-meta">
@@ -524,7 +524,7 @@
 
       <!-- NEWSLETTER PREVIEW -->
       <div class="card">
-        <div class="card-title">📰 Spring 2026 Newsletter — The Maplewood Maple</div>
+        <div class="card-title">Spring 2026 Newsletter — The Maplewood Maple</div>
 
         <div class="nl-item">
           <span style="font-size:1.4rem">🏡</span>
@@ -556,7 +556,7 @@
     <div>
       <!-- EVENTS -->
       <div class="card">
-        <div class="card-title">📅 Upcoming Events</div>
+        <div class="card-title">Upcoming Events</div>
         <div class="event-row">
           <div class="event-date"><div class="event-mo">Mar</div><div class="event-day">18</div></div>
           <div class="event-info"><strong>Board Meeting</strong><span>7:00 PM · Community Clubhouse</span></div>
@@ -577,18 +577,18 @@
 
       <!-- QUICK LINKS -->
       <div class="card">
-        <div class="card-title">⚡ Quick Links</div>
+        <div class="card-title">Quick Links</div>
         <div class="quick-grid">
           <a class="quick-link"><span class="ql-icon">🏗️</span><span class="ql-label">ACC Request</span></a>
           <a class="quick-link"><span class="ql-icon">📚</span><span class="ql-label">Bylaws</span></a>
-          <a class="quick-link"><span class="ql-icon">🔧</span><span class="ql-label">Report Issue</span></a>
+          <a class="quick-link" onclick="showReportModal()"><span class="ql-icon">🔧</span><span class="ql-label">Report Issue</span></a>
           <a class="quick-link"><span class="ql-icon">👥</span><span class="ql-label">Directory</span></a>
         </div>
       </div>
 
       <!-- BOARD -->
       <div class="card">
-        <div class="card-title">🏛️ Your Board</div>
+        <div class="card-title">Your Board</div>
         <div class="board-grid">
           <div class="board-card"><div class="avatar av1">RH</div><strong>Robert Hayes</strong><span>President</span></div>
           <div class="board-card"><div class="avatar av2">SM</div><strong>Sandra Mills</strong><span>Secretary</span></div>
@@ -608,7 +608,7 @@
 ════════════════════════════════════════════ -->
 <div id="tab-announcements" class="tab-content">
 <div class="main">
-  <div class="sec-head">📢 Announcements</div>
+  <div class="sec-head">Announcements</div>
   <div class="sec-sub">Stay informed with the latest news, alerts, and updates from your HOA board.</div>
 
   <div class="card">
@@ -620,7 +620,7 @@
     <div class="ann-card alert">
       <div class="ann-meta"><span class="pill pill-red">⚠️ Important</span><span style="font-size:12px;color:var(--muted)">Mar 5, 2026</span></div>
       <div class="ann-title">Pool Opening Delayed — New Date May 15</div>
-      <div class="ann-body">Due to necessary repairs to the filtration system discovered during our annual inspection, the community pool will open May 15th rather than May 1st. The board approved a repair contract with AquaClear Services and work begins March 17th. Questions? Contact board@maplewoodcommons.com</div>
+      <div class="ann-body">Due to necessary repairs to the filtration system discovered during our annual inspection, the community pool will open May 15th rather than May 1st. The board approved a repair contract with AquaClear Services and work begins March 17th. Questions? Contact <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9af8f5fbe8fedaf7fbeaf6ffedf5f5fef9f5f7f7f5f4e9b4f9f5f7">[email&#160;protected]</a></div>
     </div>
     <div class="ann-card info">
       <div class="ann-meta"><span class="pill pill-blue">📋 HOA Update</span><span style="font-size:12px;color:var(--muted)">Feb 28, 2026</span></div>
@@ -641,13 +641,13 @@
 ════════════════════════════════════════════ -->
 <div id="tab-newsletter" class="tab-content">
 <div class="main">
-  <div class="sec-head">📰 The Maplewood Maple</div>
+  <div class="sec-head">The Maplewood Maple</div>
   <div class="sec-sub">Your quarterly neighborhood newsletter — keeping our community connected, informed, and inspired.</div>
 
   <div class="two-col">
     <div>
       <div class="card">
-        <div class="card-title">🌸 Spring 2026 — From the President's Desk</div>
+        <div class="card-title">Spring 2026 — From the President's Desk</div>
         <p style="font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:14px">Dear Maplewood Neighbors,</p>
         <p style="font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:14px">Spring has arrived in Maplewood Commons, and with it comes the renewed energy and sense of community that makes living here so special. As I look around our neighborhood, I'm genuinely inspired by the pride you all take in your homes and in our shared spaces.</p>
         <p style="font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:14px">This quarter brought some exciting accomplishments: our entrance monument renovation is complete and looks stunning, our reserve fund remains robust, and we've launched this new community portal to make it even easier to stay connected.</p>
@@ -655,12 +655,12 @@
       </div>
 
       <div class="card">
-        <div class="card-title">🌻 Neighbor Spotlight: The Martinson Family</div>
+        <div class="card-title">Neighbor Spotlight: The Martinson Family</div>
         <p style="font-size:14px;color:var(--muted);line-height:1.85">When Kevin and Amy Martinson moved to Maplewood Commons three years ago, their front yard was standard fescue. Today it's a thriving, ACC-approved pollinator paradise featuring native Georgia wildflowers, milkweed for monarchs, and a small water feature that's become a neighborhood landmark. "We just wanted to do something good for the bees," Amy shared. Three other households have since submitted ACC requests for similar gardens. The board fully encourages these beautiful, sustainable upgrades!</p>
       </div>
 
       <div class="card">
-        <div class="card-title">🏡 Spring Lawn & Home Care Checklist</div>
+        <div class="card-title">Spring Lawn & Home Care Checklist</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
           <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:8px;padding:12px;font-size:13px;color:var(--muted)">✅ <strong style="color:var(--text)">Aerate & overseed</strong> fescue lawn in early spring</div>
           <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:8px;padding:12px;font-size:13px;color:var(--muted)">✅ <strong style="color:var(--text)">Clean gutters</strong> of winter debris before rain season</div>
@@ -674,7 +674,7 @@
 
     <div>
       <div class="card">
-        <div class="card-title">📁 Past Issues</div>
+        <div class="card-title">Past Issues</div>
         <div style="display:flex;flex-direction:column;gap:8px">
           <div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);border-radius:8px;padding:12px;cursor:pointer"><strong style="font-size:13px;color:var(--gold);display:block">🌸 Spring 2026</strong><span style="font-size:11px;color:var(--muted)">Current Issue</span></div>
           <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:12px;cursor:pointer"><strong style="font-size:13px;color:var(--text);display:block">❄️ Winter 2025</strong><span style="font-size:11px;color:var(--muted)">December 2025</span></div>
@@ -683,7 +683,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-title">✉️ Nominate a Neighbor</div>
+        <div class="card-title">Nominate a Neighbor</div>
         <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.65">Know a neighbor doing something wonderful? We'd love to feature them in our next newsletter!</p>
         <button class="btn" style="width:100%">Submit a Nomination</button>
       </div>
@@ -697,7 +697,7 @@
 ════════════════════════════════════════════ -->
 <div id="tab-minutes" class="tab-content">
 <div class="main">
-  <div class="sec-head">📋 Meeting Minutes</div>
+  <div class="sec-head">Meeting Minutes</div>
   <div class="sec-sub">Official records of all HOA board meetings — transparent governance for our community.</div>
 
   <div class="two-col">
@@ -731,7 +731,7 @@
 
     <div>
       <div class="card">
-        <div class="card-title">📁 Minutes Archive</div>
+        <div class="card-title">Minutes Archive</div>
         <div style="display:flex;flex-direction:column;gap:8px">
           <div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);border-radius:8px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer"><span style="font-size:13px;color:var(--text)">Feb 25, 2026</span><span style="font-size:11px;color:#5ecba0;font-weight:bold">APPROVED</span></div>
           <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer"><span style="font-size:13px;color:var(--text)">Jan 21, 2026</span><span style="font-size:11px;color:#5ecba0;font-weight:bold">APPROVED</span></div>
@@ -740,12 +740,12 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-title">📅 Next Meeting</div>
+        <div class="card-title">Next Meeting</div>
         <div style="text-align:center;padding:10px 0">
           <div style="font-size:52px;font-weight:bold;color:var(--gold);line-height:1">18</div>
           <div style="font-size:13px;color:var(--muted);margin-bottom:12px">March 2026 · 7:00 PM</div>
           <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:8px;padding:12px;font-size:13px;color:var(--muted)">📍 Maplewood Commons Clubhouse<br>42 Commons Drive, Roswell GA</div>
-          <button class="btn" style="margin-top:14px;width:100%">📅 Add to Calendar</button>
+          <button class="btn" onclick="showCalendarModal()" style="margin-top:14px;width:100%">📅 Add to Calendar</button>
         </div>
       </div>
     </div>
@@ -758,13 +758,13 @@
 ════════════════════════════════════════════ -->
 <div id="tab-tasks" class="tab-content">
 <div class="main">
-  <div class="sec-head">✅ Board Task Tracker</div>
+  <div class="sec-head">Board Task Tracker</div>
   <div class="sec-sub">Active action items and project status for the Maplewood Commons HOA board — Q1 2026.</div>
 
   <div class="two-col">
     <div>
       <div class="card">
-        <div class="card-title">📌 Q1 2026 Action Items</div>
+        <div class="card-title">Q1 2026 Action Items</div>
 
         <div class="task-row"><div class="task-check done">✓</div><div class="task-text done">Approve 2026 annual operating budget</div><span class="pill pill-green">Done</span></div>
         <div class="task-row"><div class="task-check done">✓</div><div class="task-text done">Complete entrance monument restoration project</div><span class="pill pill-green">Done</span></div>
@@ -779,7 +779,7 @@
       </div>
 
       <div class="card">
-        <div class="card-title">📊 Project Progress</div>
+        <div class="card-title">Project Progress</div>
         <div class="progress-wrap">
           <div class="progress-label"><span>Pool Repair Project</span><span style="color:var(--muted)">25%</span></div>
           <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
@@ -801,7 +801,7 @@
 
     <div>
       <div class="card">
-        <div class="card-title">📈 Summary</div>
+        <div class="card-title">Summary</div>
         <div style="display:flex;flex-direction:column;gap:10px">
           <div style="background:rgba(76,175,135,0.12);border:1px solid rgba(76,175,135,0.25);border-radius:8px;padding:12px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;color:#5ecba0;font-weight:bold">✓ Completed</span><span style="font-size:22px;font-weight:bold;color:#5ecba0">3</span></div>
           <div style="background:rgba(224,92,92,0.12);border:1px solid rgba(224,92,92,0.25);border-radius:8px;padding:12px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;color:#e07878;font-weight:bold">🔴 High Priority</span><span style="font-size:22px;font-weight:bold;color:#e07878">4</span></div>
@@ -811,7 +811,7 @@
       </div>
 
       <div class="card">
-        <div class="card-title">👤 Assigned To</div>
+        <div class="card-title">Assigned To</div>
         <div style="display:flex;flex-direction:column;gap:0">
           <div style="display:flex;justify-content:space-between;font-size:13px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><span>Robert Hayes</span><span style="color:var(--muted)">3 tasks</span></div>
           <div style="display:flex;justify-content:space-between;font-size:13px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><span>Sandra Mills</span><span style="color:var(--muted)">3 tasks</span></div>
@@ -829,15 +829,65 @@
 ════════════════════════════════════════════ -->
 <div id="tab-directory" class="tab-content">
 <div class="main">
-  <div class="sec-head">👥 Neighbor Directory</div>
+  <div class="sec-head">Neighbor Directory</div>
   <div class="sec-sub">Connect with your Maplewood Commons neighbors — kept strictly confidential for community use only.</div>
 
-  <div class="card" style="text-align:center;padding:48px 24px">
+  <!-- LOCK SCREEN -->
+  <div id="dir-lock" class="card" style="text-align:center;padding:48px 24px">
     <div style="font-size:56px;margin-bottom:16px">🔐</div>
     <div style="color:var(--gold);font-size:18px;font-weight:bold;margin-bottom:10px">Directory Access Requires Login</div>
     <div style="color:var(--muted);font-size:14px;max-width:380px;margin:0 auto 24px;line-height:1.7">To protect our neighbors' privacy, the community directory is password protected. Use the community password shared in your welcome packet.</div>
-    <button class="btn">🔑 Enter Community Password</button>
-    <button class="btn-out">Contact the Board</button>
+    <div style="position:relative;display:inline-block;margin-bottom:8px">
+      <button class="btn" onclick="checkDirPassword()" onmouseenter="document.getElementById('dir-tooltip').style.display='block'" onmouseleave="document.getElementById('dir-tooltip').style.display='none'">🔑 Enter Community Password</button>
+      <div id="dir-tooltip" style="display:none;position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);background:#0f1c2e;border:1px solid rgba(201,168,76,0.4);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--gold);white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,0.5);">
+        No password needed — this is a demo! Click to enter.
+        <div style="position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:10px;height:10px;background:#0f1c2e;border-right:1px solid rgba(201,168,76,0.4);border-bottom:1px solid rgba(201,168,76,0.4);transform:translateX(-50%) rotate(45deg)"></div>
+      </div>
+    </div>
+    <br>
+    <button class="btn-out" onclick="showContactModal()">Contact the Board</button>
+  </div>
+
+  <!-- DIRECTORY TABLE (hidden until unlocked) -->
+  <div id="dir-content" style="display:none">
+    <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);border-radius:10px;padding:12px 18px;margin-bottom:20px;font-size:13px;color:var(--muted);text-align:center;">
+      ⚠️ <em>The following resident information is entirely fictional and created for portfolio demonstration purposes only.</em>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Maplewood Commons — Resident Directory</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;">
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">The Anderson Family</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 101 Maplewood Commons Dr<br>📞 (770) 555-0101</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">Brian & Carol Nguyen</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 103 Maplewood Commons Dr<br>📞 (770) 555-0102</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">James Whitfield</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 105 Maplewood Commons Dr<br>📞 (770) 555-0103</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">The Patel Family</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 107 Maplewood Commons Dr<br>📞 (770) 555-0104</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">Sandra & Tom Rivera</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 109 Maplewood Commons Dr<br>📞 (770) 555-0105</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">Michael Chen</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 111 Maplewood Commons Dr<br>📞 (770) 555-0106</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">The Robinson Family</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 113 Maplewood Commons Dr<br>📞 (770) 555-0107</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">Laura & Greg Hoffman</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 115 Maplewood Commons Dr<br>📞 (770) 555-0108</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">David Okafor</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 117 Maplewood Commons Dr<br>📞 (770) 555-0109</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">The Martinez Family</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 119 Maplewood Commons Dr<br>📞 (770) 555-0110</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">Emily & Chris Park</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 121 Maplewood Commons Dr<br>📞 (770) 555-0111</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">Robert Cunningham</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 123 Maplewood Commons Dr<br>📞 (770) 555-0112</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">The Thomason Family</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 125 Maplewood Commons Dr<br>📞 (770) 555-0113</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">Angela & Derek Walsh</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 127 Maplewood Commons Dr<br>📞 (770) 555-0114</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">Kevin Sharma</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 129 Maplewood Commons Dr<br>📞 (770) 555-0115</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">The Williams Family</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 131 Maplewood Commons Dr<br>📞 (770) 555-0116</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">Patricia & Lou Greco</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 133 Maplewood Commons Dr<br>📞 (770) 555-0117</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">Marcus Johnson</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 135 Maplewood Commons Dr<br>📞 (770) 555-0118</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">The Kim Family</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 137 Maplewood Commons Dr<br>📞 (770) 555-0119</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">Rachel & Scott Brennan</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 139 Maplewood Commons Dr<br>📞 (770) 555-0120</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">Anthony Delgado</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 141 Maplewood Commons Dr<br>📞 (770) 555-0121</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">The Okonkwo Family</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 143 Maplewood Commons Dr<br>📞 (770) 555-0122</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">Diane & Frank Lawson</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 145 Maplewood Commons Dr<br>📞 (770) 555-0123</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">Steven Nakamura</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 147 Maplewood Commons Dr<br>📞 (770) 555-0124</div></div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px"><strong style="display:block;color:var(--text);margin-bottom:6px">The Campbell Family</strong><div style="font-size:13px;color:var(--muted);line-height:1.8">📍 149 Maplewood Commons Dr<br>📞 (770) 555-0125</div></div>
+      </div>
+      <div style="margin-top:20px;text-align:right">
+        <button class="btn" onclick="showUpdateDirModal()">Update Information</button>
+        <button class="btn-out" onclick="lockDirectory()">🔒 Lock Directory</button>
+      </div>
+    </div>
   </div>
 </div>
 </div>
@@ -847,13 +897,13 @@
 ════════════════════════════════════════════ -->
 <div id="tab-resources" class="tab-content">
 <div class="main">
-  <div class="sec-head">📚 Community Resources</div>
+  <div class="sec-head">Community Resources</div>
   <div class="sec-sub">HOA documents, approved vendors, and helpful guides for Maplewood Commons residents.</div>
 
   <div class="two-col">
     <div>
       <div class="card">
-        <div class="card-title">📄 Governing Documents</div>
+        <div class="card-title">Governing Documents</div>
         <div class="doc-row"><span style="font-size:1.4rem">📄</span><div><strong>Community Bylaws</strong><span>Last updated: January 2024 · PDF</span></div><span class="doc-arrow">Download →</span></div>
         <div class="doc-row"><span style="font-size:1.4rem">📋</span><div><strong>Declaration of Covenants (CCRs)</strong><span>Recorded: March 1994 · PDF</span></div><span class="doc-arrow">Download →</span></div>
         <div class="doc-row"><span style="font-size:1.4rem">🏗️</span><div><strong>Architectural Review Guidelines & ACC Form</strong><span>Updated: August 2025 · PDF + Form</span></div><span class="doc-arrow">Download →</span></div>
@@ -861,7 +911,7 @@
       </div>
 
       <div class="card">
-        <div class="card-title">🔧 HOA-Approved Vendors</div>
+        <div class="card-title">HOA-Approved Vendors</div>
         <div class="vendor-grid">
           <div class="vendor-card"><div style="font-size:1.2rem;margin-bottom:6px">🌿</div><strong>GreenScape Atlanta</strong><span class="v-cat">Landscaping & Lawn Care</span><span class="v-ph">(770) 555-0142</span></div>
           <div class="vendor-card"><div style="font-size:1.2rem;margin-bottom:6px">🏊</div><strong>AquaClear Services</strong><span class="v-cat">Pool Maintenance & Repair</span><span class="v-ph">(770) 555-0198</span></div>
@@ -873,7 +923,7 @@
 
     <div>
       <div class="card">
-        <div class="card-title">💳 Pay Dues Online</div>
+        <div class="card-title">Pay Dues Online</div>
         <div style="text-align:center;padding:8px 0">
           <div style="font-size:2rem;margin-bottom:8px">💳</div>
           <strong style="display:block;font-size:14px;margin-bottom:4px">Q2 2026 Dues</strong>
@@ -884,9 +934,9 @@
       </div>
 
       <div class="card">
-        <div class="card-title">✉️ Contact the Board</div>
+        <div class="card-title">Contact the Board</div>
         <div style="font-size:13px;color:var(--muted);line-height:2">
-          <div>📧 board@maplewoodcommons.com</div>
+          <div>📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="02606d637066426f63726e67756d6d66616d6f6f6d6c712c616d6f">[email&#160;protected]</a></div>
           <div>📮 P.O. Box 1184, Roswell GA 30076</div>
           <div>⏱️ Response within 3–5 business days</div>
         </div>
@@ -908,7 +958,7 @@
   <div style="margin-top:10px;font-size:11px;opacity:0.4">Demonstration portal — all information is fictional and created for portfolio purposes.</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   function switchTab(name, el) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
@@ -922,7 +972,102 @@
     const btns = document.querySelectorAll('nav button');
     switchTab(name, btns[map[name]]);
   }
+
+  function checkDirPassword() {
+    document.getElementById('dir-lock').style.display = 'none';
+    document.getElementById('dir-content').style.display = 'block';
+  }
+
+  function lockDirectory() {
+    document.getElementById('dir-lock').style.display = 'block';
+    document.getElementById('dir-content').style.display = 'none';
+    document.getElementById('dir-password').value = '';
+    document.getElementById('dir-error').style.display = 'none';
+  }
 </script>
 
-</body>
-</html>
+<!-- UPDATE DIRECTORY MODAL -->
+<div id="update-dir-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;">
+  <div style="background:#1a2d47;border:1px solid rgba(201,168,76,0.4);border-radius:14px;padding:32px;max-width:400px;width:90%;margin:0 auto;text-align:center;box-shadow:0 16px 48px rgba(0,0,0,0.6);">
+    <div style="color:var(--gold);font-size:18px;font-weight:bold;margin-bottom:12px;font-family:Georgia,serif">Update Contact Information</div>
+    <div style="color:var(--muted);font-size:14px;line-height:1.75;margin-bottom:24px">
+      In a live environment, pressing this button would launch the resident's native email app pre-filled with their current contact information on file. The resident would simply update any fields that have changed and send — the board would then apply the updates to the directory.
+    </div>
+    <button class="btn-out" onclick="closeUpdateDirModal()" style="width:100%">Cancel</button>
+  </div>
+</div>
+
+<!-- CONTACT MODAL -->
+<div id="contact-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;">
+  <div style="background:#1a2d47;border:1px solid rgba(201,168,76,0.4);border-radius:14px;padding:32px;max-width:400px;width:90%;margin:0 auto;text-align:center;box-shadow:0 16px 48px rgba(0,0,0,0.6);">
+    <div style="color:var(--gold);font-size:18px;font-weight:bold;margin-bottom:12px;font-family:Georgia,serif">Contact the Board</div>
+    <div style="color:var(--muted);font-size:14px;line-height:1.75;margin-bottom:24px">
+      In a live environment, pressing this button would launch the resident's native email app with a pre-addressed message to the board. The resident would simply describe their question or concern in their own words and send — no additional steps required.
+    </div>
+    <button class="btn-out" onclick="closeContactModal()" style="width:100%">Cancel</button>
+  </div>
+</div>
+
+<!-- CALENDAR MODAL -->
+<div id="calendar-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;">
+  <div style="background:#1a2d47;border:1px solid rgba(201,168,76,0.4);border-radius:14px;padding:32px;max-width:400px;width:90%;margin:0 auto;text-align:center;box-shadow:0 16px 48px rgba(0,0,0,0.6);">
+    <div style="color:var(--gold);font-size:18px;font-weight:bold;margin-bottom:12px;font-family:Georgia,serif">Add to Calendar</div>
+    <div style="color:var(--muted);font-size:14px;line-height:1.75;margin-bottom:24px">
+      In a live environment, pressing this button would add the board meeting directly to the resident's native calendar app — pre-filled with the date, time, and location. No manual entry required.
+    </div>
+    <button class="btn-out" onclick="closeCalendarModal()" style="width:100%">Cancel</button>
+  </div>
+</div>
+
+<!-- REPORT ISSUE MODAL -->
+<div id="report-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;">
+  <div style="background:#1a2d47;border:1px solid rgba(201,168,76,0.4);border-radius:14px;padding:32px;max-width:400px;width:90%;margin:0 auto;text-align:center;box-shadow:0 16px 48px rgba(0,0,0,0.6);">
+    <div style="color:var(--gold);font-size:18px;font-weight:bold;margin-bottom:12px;font-family:Georgia,serif">Report an Issue</div>
+    <div style="color:var(--muted);font-size:14px;line-height:1.75;margin-bottom:24px">
+      In a live environment, pressing this button would launch the resident's native email app with a pre-addressed message to the board. The resident would simply describe the issue in their own words and send — no additional steps required.
+    </div>
+    <button class="btn-out" onclick="closeReportModal()" style="width:100%">Cancel</button>
+  </div>
+</div>
+
+<script>
+  function showReportModal() {
+    document.getElementById('report-modal').style.display = 'flex';
+  }
+  function closeReportModal() {
+    document.getElementById('report-modal').style.display = 'none';
+  }
+  document.getElementById('report-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeReportModal();
+  });
+
+  function showUpdateDirModal() {
+    document.getElementById('update-dir-modal').style.display = 'flex';
+  }
+  function closeUpdateDirModal() {
+    document.getElementById('update-dir-modal').style.display = 'none';
+  }
+  document.getElementById('update-dir-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeUpdateDirModal();
+  });
+
+  function showContactModal() {
+    document.getElementById('contact-modal').style.display = 'flex';
+  }
+  function closeContactModal() {
+    document.getElementById('contact-modal').style.display = 'none';
+  }
+  document.getElementById('contact-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeContactModal();
+  });
+
+  function showCalendarModal() {
+    document.getElementById('calendar-modal').style.display = 'flex';
+  }
+  function closeCalendarModal() {
+    document.getElementById('calendar-modal').style.display = 'none';
+  }
+  document.getElementById('calendar-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeCalendarModal();
+  });
+</script>
